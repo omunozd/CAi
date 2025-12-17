@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¿Qué Fai mi Cai?</title>
+  <link rel="stylesheet" href="QFMC/web/frontend/styles.css">
+  <script src="QFMC/web/backend/script.js" defer></script>
+</head>
+<body>
+  <main id="event-frame" class="frame">
+    <header id="event-header" class="header">
+      <img id="logo-left" src="QFMC/web/frontend/sources/Logo-QFMC.svg" alt="Logo Izquierdo" class="logo" />
+      <div id="event-day" class="day" contenteditable="true" spellcheck="false">Día</div>
+      <img id="logo-right" src="QFMC/web/frontend/sources/logo_CAi.svg" alt="Logo Derecho" class="logo" />
+    </header>
+
+    <div id="event-container" class="center-container">
+      <div id="event-info" class="info">
+        <span id="event-type" class="chip-type" contenteditable="true" spellcheck="false">Tipo</span>
+        <h1 id="event-title" class="title" contenteditable="true" spellcheck="false">💛 Título del evento</h1>
+        <div id="event-details" class="chips">
+          <span class="chip" contenteditable="true" spellcheck="false"><span class="icon">🕒</span> <span id="event-time">Horario</span> </span>
+          <span class="chip" contenteditable="true" spellcheck="false"><span class="icon">📍</span> <span id="event-location">Lugar</span></span>
+        </div>
+        <p hidden id="event-description" class="extra-text" contenteditable="true" spellcheck="false">¡Estamos trabajando para tí!</p>
+        <div id="event-tags" class="extra-chips">
+          <span id="tag-1" class="chip" contenteditable="true" spellcheck="false">Etiqueta 1</span>
+          <span id="tag-2" class="chip" contenteditable="true" spellcheck="false">Etiqueta  2</span>
+          <span id="tag-3" class="chip" contenteditable="true" spellcheck="false">Etiqueta 3</span>
+        </div>
+      </div>
+      <div id="event-image-container" class="side-wrap">
+        <img id="event-image" src="QFMC/web/frontend/sources/carton.jpg" alt="Imagen del evento" class="side-image" />
+      </div>
+    </div>
+  </main>
+</body>
+</html>
