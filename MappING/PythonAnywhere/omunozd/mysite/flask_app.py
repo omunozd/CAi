@@ -1,5 +1,6 @@
 from flask import Flask, make_response, send_file
 from ics import Calendar, Event
+from threading import Thread, Timer
 import requests
 import os
 import datetime
@@ -11,7 +12,7 @@ from wsgiref.simple_server import make_server
 import traceback
 
 from mysite.TVs.QFMC import spotify
-from mysite.tokens import NOTION_TOKEN
+from PythonAnywhere.omunozd.mysite.notion_creds import HEADERS_TRINIP, DATABASES_IDS
 
 def get_content_type(file_path: str) -> str:
     """Determina el Content-Type basado en la extensión del archivo"""
@@ -42,15 +43,6 @@ def get_content_type(file_path: str) -> str:
 
 TURNOS = Calendar()
 
-HEADERS = {
-    "Authorization": f"Bearer {NOTION_TOKEN}",
-    "Notion-Version": "2022-06-28",
-    "Content-Type": "application/json",
-}
-
-DATABASES_IDS = {
-    "actividades_ing": "2a1913886179807ea714c65882430bb7"
-}
 
 FOLDER = ''
 
@@ -64,7 +56,7 @@ def get_notion_data(payload: dict = {}, filename: str = "calendar.ics"):
     payload["page_size"] = 100
 
     while run:
-        response = requests.post(url, headers=HEADERS, json=payload)
+        response = requests.post(url, headers=HEADERS_TRINIP, json=payload)
 
         data.extend(response.json().get("results", []))
 
@@ -330,7 +322,7 @@ def TVs(filepath: str):
             
             # Llamar a Notion API
             url = f"https://api.notion.com/v1/databases/{DATABASES_IDS['actividades_ing']}/query"
-            response = requests.post(url, headers=HEADERS, json=payload)
+            response = requests.post(url, headers=HEADERS_TRINIP, json=payload)
             
             if response.status_code != 200:
                 return make_response(f"Error llamando a Notion API: {response.status_code} - {response.text}", 500)
@@ -351,6 +343,7 @@ def TVs(filepath: str):
             traceback.print_exc()
             print("")
             return make_response(f"Error al actualizar datos de Notion: {str(e)}\n{str(e.__traceback__)}", 500)
+    
     elif filepath == "cancion":
         poss_filename = "QFMC_cancionDelDia_" + datetime.today().strftime("%d_%m_%y") + ".svg"
         poss_filepath = os.path.join("QFMC","Cancion_del_dia","spotify_codes",poss_filename)
@@ -360,15 +353,13 @@ def TVs(filepath: str):
 
     elif filepath == "actualizar_codigos_spotify":
         try:
-            spotify.actualizar_codigos_programados(os.path.join(
-                "mysite", "TVs" ,"QFMC","Cancion_del_dia","programacion.csv"
-            ),
-            limpiar_carpeta= True)
+            spotify.importar_programacion_notion()
         except Exception as e:
-            print("ERROR al actualizar códigos spotify")
+            Warning("ERROR al actualizar códigos spotify")
             traceback.print_exc()
             return make_response(f"Error al actualizar los códigos de spotify. Error interno: <br><p>{e}</p>", 500)
         else:
+            print("Códigos actualizados desde Notion.")
             return make_response("Códigos Actualizados. Revise el código de hoy <a href='https://omunozd.pythonanywhere.com/TV/cancion'>aquí</a>.",200)
 
     # Path del archivo solicitado
@@ -406,11 +397,19 @@ if __name__ == '__main__':
     HOST = 'localhost'
     PORT = 4160
 
-    with make_server(HOST, PORT, app) as httpd:
-        try:
-            print(f'Iniciando servidor: http://{HOST}:{PORT}')
-            print('''Utiliza 'Ctrl + C' o 'Cmd + C' para apagar el servidor''')
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print('\nApagando servidor')
-            httpd.shutdown()
+    class ServerThread(Thread):
+        def __init__(self):
+            super().__init__(name="Local Server Thread")
+
+        def run(self):
+            with make_server(HOST, PORT, app) as httpd:
+                try:
+                    print(f'Iniciando servidor: http://{HOST}:{PORT}')
+                    print('''Utiliza 'Ctrl + C' o 'Cmd + C' para apagar el servidor''')
+                    httpd.serve_forever()
+                except KeyboardInterrupt:
+                    print('\nApagando servidor')
+                    httpd.shutdown()
+
+    localserver_t = ServerThread()
+    localserver_t.start()

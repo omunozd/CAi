@@ -1,7 +1,7 @@
 from xml.etree import ElementTree as ET
 from typing import Optional
 import shutil, os, re
-
+from mysite.utils import printt
 
 def add_bar_animations(
         svg_path: str,
@@ -21,7 +21,7 @@ def add_bar_animations(
     if not os.path.exists(svg_path):
         raise FileNotFoundError(f"No se pudo encontrar el SVG: {svg_path}")
 
-    print('target path:', svg_path)
+    printt('Target path:', svg_path)
     ET.register_namespace('', "http://www.w3.org/2000/svg")
 
     # Parse
@@ -50,7 +50,7 @@ def add_bar_animations(
             if w > 50 or h > 200:
                 continue
             rects.append(r)
-        print(f"Auto-detected {len(rects)} bar rects (no 'bar' class present)")
+        printt(f"Auto-detected {len(rects)} bar rects (no 'bar' class present)")
 
     # ensure a <style> element exists to hold per-bar keyframes
     style_el = root.find(ns + 'style')
@@ -163,10 +163,10 @@ def add_bar_animations(
     # write backup and write file
     bak_path = svg_path + '.bak'
     shutil.copy(svg_path, bak_path)
-    print(f"Backup file creado en {bak_path}")
+    printt(f"Backup file creado en {bak_path}")
 
     tree.write(svg_path, encoding='utf-8', xml_declaration=True)
-    print(f"SVG animado creado en {svg_path}\n")
+    printt(f"SVG animado creado en {svg_path}")
 
     return bak_path
 
