@@ -12,7 +12,8 @@ from wsgiref.simple_server import make_server
 import traceback
 
 from mysite.TVs.QFMC import spotify
-from PythonAnywhere.omunozd.mysite.notion_creds import HEADERS_TRINIP, DATABASES_IDS
+from mysite.notion_creds import HEADERS_TRINIP, DATABASES_IDS
+from mysite.utils import printt
 
 def get_content_type(file_path: str) -> str:
     """Determina el Content-Type basado en la extensión del archivo"""
@@ -345,11 +346,18 @@ def TVs(filepath: str):
             return make_response(f"Error al actualizar datos de Notion: {str(e)}\n{str(e.__traceback__)}", 500)
     
     elif filepath == "cancion":
-        poss_filename = "QFMC_cancionDelDia_" + datetime.today().strftime("%d_%m_%y") + ".svg"
-        poss_filepath = os.path.join("QFMC","Cancion_del_dia","spotify_codes",poss_filename)
+        folderpath = os.path.join("QFMC","Cancion_del_dia","spotify_codes")
 
-        filepath = poss_filepath if os.path.exists(os.path.join("mysite","TVs",poss_filepath)) else os.path.join(
+        filepath = os.path.join(
             "QFMC","Cancion_del_dia","spotify_codes","default.svg")
+
+        files = os.listdir(os.path.join("mysite","TVs",folderpath))
+        today_str = datetime.today().strftime("%d_%m_%y")
+
+        for file in files:
+            if today_str in file and not file.endswith(".bak"):
+                filepath = os.path.join(folderpath,file)
+                break
 
     elif filepath == "actualizar_codigos_spotify":
         try:
@@ -359,7 +367,7 @@ def TVs(filepath: str):
             traceback.print_exc()
             return make_response(f"Error al actualizar los códigos de spotify. Error interno: <br><p>{e}</p>", 500)
         else:
-            print("Códigos actualizados desde Notion.")
+            printt("Códigos actualizados desde Notion.")
             return make_response("Códigos Actualizados. Revise el código de hoy <a href='https://omunozd.pythonanywhere.com/TV/cancion'>aquí</a>.",200)
 
     # Path del archivo solicitado

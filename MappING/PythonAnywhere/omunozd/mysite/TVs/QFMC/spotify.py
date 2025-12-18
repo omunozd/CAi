@@ -67,7 +67,7 @@ def guardar_codigo_spotify(
 
     if "http" in URI_or_URL:
         URL_data = URI_or_URL.split("/")
-        URI = f"spotify:{URL_data[3]}:{URL_data[4].split("?")[0]}"
+        URI = f"spotify:{URL_data[-2]}:{URL_data[-1].split("?")[0]}"
     elif "spotify:" in URI_or_URL:
         URI = URI_or_URL
     else:
@@ -134,7 +134,6 @@ def guardar_codigo_spotify(
         with open(filepath, "w") as file:
             with lock_escritura:
                 file.write(svg)
-                printt(f"Código Spotify guardado en '{filepath}'")
 
         return filepath
 
@@ -215,7 +214,9 @@ def importar_programacion_notion(limpiar_carpeta: bool = True):
     def generar_y_animar(_data_cancion: dict):
         _svg_path = guardar_codigo_spotify(**_data_cancion)
         add_bar_animations(_svg_path)
+        printt(f"Spotify Code ANIMADO y GUARDADO ({_svg_path})")
 
+    threads = []
     for entrada in data:
         if not entrada["properties"]["Fecha"]["date"]["start"] or not entrada["properties"]["URL"]["url"]:
             continue
@@ -240,13 +241,17 @@ def importar_programacion_notion(limpiar_carpeta: bool = True):
         data_cancion["color_barras"] = entrada["properties"]["Barras Blancas"]["checkbox"]
         data_cancion["logo_QFMC"] = entrada["properties"]["Logo QFMC"]["checkbox"]
 
-        printt("Guardando Código, Canción:", data_cancion["nombre_cancion"])
-        Thread(
+        printt("Generando Código, Canción:", data_cancion["nombre_cancion"])
+        thread = Thread(
             name=f"Thread Canción: {data_cancion['nombre_cancion']}",
             target=generar_y_animar,
             args=(data_cancion,)
-        ).start()
+        )
+        threads.append(thread)
+        thread.start()
 
+    for thread in threads:
+        thread.join()
 
 if __name__ == "__main__":
 
