@@ -217,353 +217,6 @@
     },
     {
       "object": "page",
-      "id": "37e91388-6179-8013-b15c-ef884253be76",
-      "created_time": "2026-06-13T20:41:00.000Z",
-      "last_edited_time": "2026-06-13T20:46:00.000Z",
-      "created_by": {
-        "object": "user",
-        "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
-      },
-      "last_edited_by": {
-        "object": "user",
-        "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
-      },
-      "cover": {
-        "type": "external",
-        "external": {
-          "url": "https://images.unsplash.com/photo-1615500025837-cf3a8716c83d?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb"
-        }
-      },
-      "icon": {
-        "type": "emoji",
-        "emoji": "👨‍🏫"
-      },
-      "parent": {
-        "type": "database_id",
-        "database_id": "2a191388-6179-807e-a714-c65882430bb7"
-      },
-      "in_trash": false,
-      "is_archived": false,
-      "is_locked": false,
-      "properties": {
-        "Comentario": {
-          "id": "%40oht",
-          "type": "rich_text",
-          "rich_text": [
-            {
-              "type": "text",
-              "text": {
-                "content": "Una junta piola para conocer mejor a tus docentes ;)",
-                "link": null
-              },
-              "annotations": {
-                "bold": false,
-                "italic": false,
-                "strikethrough": false,
-                "underline": false,
-                "code": false,
-                "color": "default"
-              },
-              "plain_text": "Una junta piola para conocer mejor a tus docentes ;)",
-              "href": null
-            }
-          ]
-        },
-        "Tipo": {
-          "id": "CqKE",
-          "type": "select",
-          "select": {
-            "id": "8ae11e7f-7daf-472d-966f-af49832456bd",
-            "name": "Salida",
-            "color": "yellow"
-          }
-        },
-        "Etiquetas": {
-          "id": "G~BZ",
-          "type": "multi_select",
-          "multi_select": []
-        },
-        "Organiza": {
-          "id": "L%3FvU",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "ef1f1f9f-9841-45de-bf16-7776830e2731",
-              "name": "CA",
-              "color": "orange"
-            },
-            {
-              "id": "9cba865c-db56-4a12-bb08-1039b57090de",
-              "name": "CAi",
-              "color": "yellow"
-            }
-          ]
-        },
-        "End Date Calendar": {
-          "id": "Ortv",
-          "type": "formula",
-          "formula": {
-            "type": "date",
-            "date": {
-              "start": "2026-06-18",
-              "end": null,
-              "time_zone": null
-            }
-          }
-        },
-        "Color Calendar": {
-          "id": "PjN%5E",
-          "type": "formula",
-          "formula": {
-            "type": "number",
-            "number": 1
-          }
-        },
-        "Inscripciones": {
-          "id": "RnWW",
-          "type": "url",
-          "url": null
-        },
-        "AllDay Calendar": {
-          "id": "Zyi~",
-          "type": "formula",
-          "formula": {
-            "type": "string",
-            "string": "yes"
-          }
-        },
-        "Público Objetivo": {
-          "id": "%5CoJN",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "93ac3bfd-0897-49e0-9b20-6c01393d8f32",
-              "name": "General",
-              "color": "gray"
-            }
-          ]
-        },
-        "Público": {
-          "id": "_XKn",
-          "type": "checkbox",
-          "checkbox": true
-        },
-        "Fecha": {
-          "id": "aNoC",
-          "type": "date",
-          "date": {
-            "start": "2026-06-18",
-            "end": null,
-            "time_zone": null
-          }
-        },
-        "Áreas": {
-          "id": "i%3AXf",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "02080771-bcfb-424e-a262-5ce08f70b836",
-              "name": "Docencia",
-              "color": "gray"
-            }
-          ]
-        },
-        "Lugar": {
-          "id": "vaIL",
-          "type": "rich_text",
-          "rich_text": []
-        },
-        "Info": {
-          "id": "wduh",
-          "type": "url",
-          "url": null
-        },
-        "Nombre": {
-          "id": "title",
-          "type": "title",
-          "title": [
-            {
-              "type": "text",
-              "text": {
-                "content": "Backstage Docente: RJ?",
-                "link": null
-              },
-              "annotations": {
-                "bold": false,
-                "italic": false,
-                "strikethrough": false,
-                "underline": false,
-                "code": false,
-                "color": "default"
-              },
-              "plain_text": "Backstage Docente: RJ?",
-              "href": null
-            }
-          ]
-        }
-      },
-      "url": "https://app.notion.com/p/Backstage-Docente-RJ-37e9138861798013b15cef884253be76",
-      "public_url": null,
-      "archived": false
-    },
-    {
-      "object": "page",
-      "id": "37e91388-6179-803b-bd7e-fa44a4d5ca4b",
-      "created_time": "2026-06-13T20:39:00.000Z",
-      "last_edited_time": "2026-06-13T20:41:00.000Z",
-      "created_by": {
-        "object": "user",
-        "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
-      },
-      "last_edited_by": {
-        "object": "user",
-        "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
-      },
-      "cover": {
-        "type": "external",
-        "external": {
-          "url": "https://images.unsplash.com/photo-1616530940355-351fabd9524b?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb"
-        }
-      },
-      "icon": {
-        "type": "emoji",
-        "emoji": "🪧"
-      },
-      "parent": {
-        "type": "database_id",
-        "database_id": "2a191388-6179-807e-a714-c65882430bb7"
-      },
-      "in_trash": false,
-      "is_archived": false,
-      "is_locked": false,
-      "properties": {
-        "Comentario": {
-          "id": "%40oht",
-          "type": "rich_text",
-          "rich_text": []
-        },
-        "Tipo": {
-          "id": "CqKE",
-          "type": "select",
-          "select": {
-            "id": "70e57a5d-a779-479a-b84e-3c0a9ed4612c",
-            "name": "Taller",
-            "color": "orange"
-          }
-        },
-        "Etiquetas": {
-          "id": "G~BZ",
-          "type": "multi_select",
-          "multi_select": []
-        },
-        "Organiza": {
-          "id": "L%3FvU",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "9cba865c-db56-4a12-bb08-1039b57090de",
-              "name": "CAi",
-              "color": "yellow"
-            }
-          ]
-        },
-        "End Date Calendar": {
-          "id": "Ortv",
-          "type": "formula",
-          "formula": {
-            "type": "date",
-            "date": {
-              "start": "2026-06-17",
-              "end": null,
-              "time_zone": null
-            }
-          }
-        },
-        "Color Calendar": {
-          "id": "PjN%5E",
-          "type": "formula",
-          "formula": {
-            "type": "number",
-            "number": 5
-          }
-        },
-        "Inscripciones": {
-          "id": "RnWW",
-          "type": "url",
-          "url": null
-        },
-        "AllDay Calendar": {
-          "id": "Zyi~",
-          "type": "formula",
-          "formula": {
-            "type": "string",
-            "string": "yes"
-          }
-        },
-        "Público Objetivo": {
-          "id": "%5CoJN",
-          "type": "multi_select",
-          "multi_select": []
-        },
-        "Público": {
-          "id": "_XKn",
-          "type": "checkbox",
-          "checkbox": false
-        },
-        "Fecha": {
-          "id": "aNoC",
-          "type": "date",
-          "date": {
-            "start": "2026-06-17",
-            "end": null,
-            "time_zone": null
-          }
-        },
-        "Áreas": {
-          "id": "i%3AXf",
-          "type": "multi_select",
-          "multi_select": []
-        },
-        "Lugar": {
-          "id": "vaIL",
-          "type": "rich_text",
-          "rich_text": []
-        },
-        "Info": {
-          "id": "wduh",
-          "type": "url",
-          "url": null
-        },
-        "Nombre": {
-          "id": "title",
-          "type": "title",
-          "title": [
-            {
-              "type": "text",
-              "text": {
-                "content": "Taller de Posters para Congresos",
-                "link": null
-              },
-              "annotations": {
-                "bold": false,
-                "italic": false,
-                "strikethrough": false,
-                "underline": false,
-                "code": false,
-                "color": "default"
-              },
-              "plain_text": "Taller de Posters para Congresos",
-              "href": null
-            }
-          ]
-        }
-      },
-      "url": "https://app.notion.com/p/Taller-de-Posters-para-Congresos-37e913886179803bbd7efa44a4d5ca4b",
-      "public_url": null,
-      "archived": false
-    },
-    {
-      "object": "page",
       "id": "37e91388-6179-8044-b644-cfc74edd8878",
       "created_time": "2026-06-13T20:35:00.000Z",
       "last_edited_time": "2026-06-13T20:39:00.000Z",
@@ -1292,7 +945,7 @@
       "object": "page",
       "id": "37e91388-6179-80af-9545-eea5feee02de",
       "created_time": "2026-06-13T20:10:00.000Z",
-      "last_edited_time": "2026-06-13T20:26:00.000Z",
+      "last_edited_time": "2026-06-13T22:31:00.000Z",
       "created_by": {
         "object": "user",
         "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
@@ -1346,9 +999,9 @@
           "id": "CqKE",
           "type": "select",
           "select": {
-            "id": "ca1ee6f7-55e7-4124-a1bd-6b2349a0d355",
-            "name": "Convocatoria",
-            "color": "default"
+            "id": "0f94b17f-f938-4ceb-843f-ed5db52b52fd",
+            "name": "Inicio plazo",
+            "color": "pink"
           }
         },
         "Etiquetas": {
@@ -1453,7 +1106,7 @@
             {
               "type": "text",
               "text": {
-                "content": "Comienzo EnfoCAi",
+                "content": "EnfoCAi",
                 "link": null
               },
               "annotations": {
@@ -1464,13 +1117,13 @@
                 "code": false,
                 "color": "default"
               },
-              "plain_text": "Comienzo EnfoCAi",
+              "plain_text": "EnfoCAi",
               "href": null
             }
           ]
         }
       },
-      "url": "https://app.notion.com/p/Comienzo-EnfoCAi-37e91388617980af9545eea5feee02de",
+      "url": "https://app.notion.com/p/EnfoCAi-37e91388617980af9545eea5feee02de",
       "public_url": null,
       "archived": false
     },
@@ -1490,15 +1143,15 @@
       "cover": {
         "type": "file",
         "file": {
-          "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/45ab6194-12e0-4c89-9728-051a418739cb/607e761d-3eff-4a5d-9d79-9b4ed6a2a1c8/El_HUB_FIUCCAi_nace_como_una_iniciativa_conjunta_entre_la_Fundacin_de_Ingenieros_UC_el_Centro.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4662L5CEYZU%2F20260613%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260613T220220Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEG0aCXVzLXdlc3QtMiJHMEUCIBlvWsW2qgEFJLNi8Lpz0hxOdt2vUMOaBUW0uHyIEljVAiEAq5CqqRR5vD6vjAeTatryn%2BBSjKoV4g03LStrjUxdf3oq%2FwMINhAAGgw2Mzc0MjMxODM4MDUiDLjsKCdQ6VGQ3RIS%2FircA1bA30Y38%2BzC0Vh5dpp%2FPDneLYl0G%2BGgjdfmDivb3DxrkNe2wAtqw0mqPiGcveHk3eZA61kR5Q0yqFSdup3CfL2EVI9ebUJ%2FmC7K7%2Fyp3IHsEr4z5VYUJcs5xZ7I2GbX7Z4PIiR%2FVyU88tVpoOOXXEUzeeRUiDvdWbygNYUR7gy%2BqUgwqgNPeksxR%2BrVNhwKYWCeuZbZ95tfcZ64lgxN2JVQXFHPlwAgwjAWZlXmP5LIL5JMK6WggLu1CiKM5moEU6iADQ2WdqU3rr7XqDBWGpovUlJykHiu8bdrv0lNYB8QX5ovXyy4NLqFDOJoSkqYqRghUisZ2oVKG5wSFoXKvBnL6uNdgNdCUhVCHNzMOJGVZMOkZWFm%2Bk348%2FT5n3hVVJQzJngUbMaHmypcnBVENPxYEtgOCAsBWYYXo8sLDgT4G1MzSJIKBNqpuCRpeM29TL2USJV9i4pMi92b3f6NYnMRb9kyQP7%2BAqWbNdni310YsVdkgEz2rrhkZdeQ%2B6I6vUz2AA0OtxkAjEXvnMfwV2PPmkwrI6m%2FLsWZSgUKodBnaCOaCmHhKpohSYGvjetD5NiHl9xFwuDOG6FtP1h%2FWrx1nJSgU%2BmxmtPP%2B2VcAYMlyzXqc%2BjAM%2BTmOvEfMICBt9EGOqUBaso0rD7ZO2ELd2ic5qhQXWAHtiZuIsN8UW8S5%2FbmDLe608btS2WTiQXKXyUod90uAcdIBYqDlyO9U7jbZL72UqiAfbY7e6gYV6f5%2F%2FBVmZb3nje9HeKvdQ4sGPjq1Pvi3cwMV4wfSiC76BNvRRZIvc0qe2BZSqZU%2Fe7C6KCPEC8%2BCcPmvtl%2FHXD%2FB6jNKHzRjQ%2BSyQr17dAFXpnkYP00ByflKUyS&X-Amz-Signature=ddf8bbc8d65154036425f7a3b3e910d6d098d7bc6deb9bb6afbabe8164464e39&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-          "expiry_time": "2026-06-13T23:02:20.328Z"
+          "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/45ab6194-12e0-4c89-9728-051a418739cb/607e761d-3eff-4a5d-9d79-9b4ed6a2a1c8/El_HUB_FIUCCAi_nace_como_una_iniciativa_conjunta_entre_la_Fundacin_de_Ingenieros_UC_el_Centro.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466X474TFSH%2F20260613%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260613T231239Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEG8aCXVzLXdlc3QtMiJIMEYCIQDTvc6zAhYqOhZOCO%2F0VywuzWjv44iqG0NQFNv9xVsfTQIhAI7eLPFrS0n6v2Czb731sqqWSVqYCbM%2Bxo%2FXbAFNqF6yKv8DCDgQABoMNjM3NDIzMTgzODA1IgysK5HHeYEHgegnxSAq3AM7vt1%2FwEUWWz0Rg84hOoDqubWXGoHIQtp4SYCPzv8Lb2PT7qflU023h571MpUk5uITs30MBavMQkb7qnOb6NiyRq5M5WLfZ4bjazcPRwAQIaAILCdjJO%2Fx%2FPy4VWEdJpPH4YrRIIau79qYRgOIBmysmt1sf1Se1obClsDSRSDwTuOhm06NrVMOG%2BhMdNgSMHCAPmxJjEOosW6ZdHZCOaOZjUtsqx2PoaMeMEA674B7MlG1cL0vLsT%2BE%2FlPrKg18Tv6Z%2BqQKjfwCxZLSqGo3HRWMIpP96vWOwUUDZeCxqP4rp3i%2BfpYEJfVJVlhSeDWMuinljFRomAa7TGt9M1eBWz%2BAAndQ6Skk%2F5kSVtzVtrRMFA%2Fj11q7XHXe34h%2FZAxfxZlVlwWuXbDyvFN04F2WA85%2FGlUcJe6eHW3d%2BYh%2BKQr%2FCldmRh0ZEzqAvPTumDBC9rQNiAnm%2FRD7uOp1OqJoJ8S9GNhXf6rbUFnhyR6KQN8at1vWHeD9VQsg5MVGWkBWhz5PK51OVqG6rutF23O8wzzvSS98rhYEi5tGqel%2BpmQeJU9TSOEfzif4v3nYZ5wqo2aX8mE6%2BUO8XJDkTyxeQJjruuOJVv6LVOyhRYLUI%2BmyBpXxfu1xVSW2odeajDetLfRBjqkAaoQeFbcxf7%2FOHYn3JNU90y91E%2FTFJ1AWMW4Q7wIQ4TMSa3iMiyRaDm%2BP9p0bg0uKFMty4uAx7L1HxycjkvXklNi2%2Bgd4dAl73dJ0vKr9FOBheWeEMY3bjSUqdV0e2DRFwv42mt1AG1MksU10iFMdy9wqYNYjpGnf1tG60P8c15pqcjYeUNP878VUBfBdrpGoiolY%2BnoMUdkATJ3vz2xyAAxtIYU&X-Amz-Signature=9aa850177d3762e7f412d9033409930aa44492f8350f321a4c1f3be59552965b&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+          "expiry_time": "2026-06-14T00:12:39.174Z"
         }
       },
       "icon": {
         "type": "file",
         "file": {
-          "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/45ab6194-12e0-4c89-9728-051a418739cb/feb2a112-3f5a-457c-b084-2ae3786ff913/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB4662L5CEYZU%2F20260613%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260613T220220Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEG0aCXVzLXdlc3QtMiJHMEUCIBlvWsW2qgEFJLNi8Lpz0hxOdt2vUMOaBUW0uHyIEljVAiEAq5CqqRR5vD6vjAeTatryn%2BBSjKoV4g03LStrjUxdf3oq%2FwMINhAAGgw2Mzc0MjMxODM4MDUiDLjsKCdQ6VGQ3RIS%2FircA1bA30Y38%2BzC0Vh5dpp%2FPDneLYl0G%2BGgjdfmDivb3DxrkNe2wAtqw0mqPiGcveHk3eZA61kR5Q0yqFSdup3CfL2EVI9ebUJ%2FmC7K7%2Fyp3IHsEr4z5VYUJcs5xZ7I2GbX7Z4PIiR%2FVyU88tVpoOOXXEUzeeRUiDvdWbygNYUR7gy%2BqUgwqgNPeksxR%2BrVNhwKYWCeuZbZ95tfcZ64lgxN2JVQXFHPlwAgwjAWZlXmP5LIL5JMK6WggLu1CiKM5moEU6iADQ2WdqU3rr7XqDBWGpovUlJykHiu8bdrv0lNYB8QX5ovXyy4NLqFDOJoSkqYqRghUisZ2oVKG5wSFoXKvBnL6uNdgNdCUhVCHNzMOJGVZMOkZWFm%2Bk348%2FT5n3hVVJQzJngUbMaHmypcnBVENPxYEtgOCAsBWYYXo8sLDgT4G1MzSJIKBNqpuCRpeM29TL2USJV9i4pMi92b3f6NYnMRb9kyQP7%2BAqWbNdni310YsVdkgEz2rrhkZdeQ%2B6I6vUz2AA0OtxkAjEXvnMfwV2PPmkwrI6m%2FLsWZSgUKodBnaCOaCmHhKpohSYGvjetD5NiHl9xFwuDOG6FtP1h%2FWrx1nJSgU%2BmxmtPP%2B2VcAYMlyzXqc%2BjAM%2BTmOvEfMICBt9EGOqUBaso0rD7ZO2ELd2ic5qhQXWAHtiZuIsN8UW8S5%2FbmDLe608btS2WTiQXKXyUod90uAcdIBYqDlyO9U7jbZL72UqiAfbY7e6gYV6f5%2F%2FBVmZb3nje9HeKvdQ4sGPjq1Pvi3cwMV4wfSiC76BNvRRZIvc0qe2BZSqZU%2Fe7C6KCPEC8%2BCcPmvtl%2FHXD%2FB6jNKHzRjQ%2BSyQr17dAFXpnkYP00ByflKUyS&X-Amz-Signature=11322475f16cc858f7b1126f6550e0db9769ebe93286fc6a989605cf0f7d8e89&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
-          "expiry_time": "2026-06-13T23:02:20.328Z"
+          "url": "https://prod-files-secure.s3.us-west-2.amazonaws.com/45ab6194-12e0-4c89-9728-051a418739cb/feb2a112-3f5a-457c-b084-2ae3786ff913/image.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=ASIAZI2LB466X474TFSH%2F20260613%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20260613T231239Z&X-Amz-Expires=3600&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEG8aCXVzLXdlc3QtMiJIMEYCIQDTvc6zAhYqOhZOCO%2F0VywuzWjv44iqG0NQFNv9xVsfTQIhAI7eLPFrS0n6v2Czb731sqqWSVqYCbM%2Bxo%2FXbAFNqF6yKv8DCDgQABoMNjM3NDIzMTgzODA1IgysK5HHeYEHgegnxSAq3AM7vt1%2FwEUWWz0Rg84hOoDqubWXGoHIQtp4SYCPzv8Lb2PT7qflU023h571MpUk5uITs30MBavMQkb7qnOb6NiyRq5M5WLfZ4bjazcPRwAQIaAILCdjJO%2Fx%2FPy4VWEdJpPH4YrRIIau79qYRgOIBmysmt1sf1Se1obClsDSRSDwTuOhm06NrVMOG%2BhMdNgSMHCAPmxJjEOosW6ZdHZCOaOZjUtsqx2PoaMeMEA674B7MlG1cL0vLsT%2BE%2FlPrKg18Tv6Z%2BqQKjfwCxZLSqGo3HRWMIpP96vWOwUUDZeCxqP4rp3i%2BfpYEJfVJVlhSeDWMuinljFRomAa7TGt9M1eBWz%2BAAndQ6Skk%2F5kSVtzVtrRMFA%2Fj11q7XHXe34h%2FZAxfxZlVlwWuXbDyvFN04F2WA85%2FGlUcJe6eHW3d%2BYh%2BKQr%2FCldmRh0ZEzqAvPTumDBC9rQNiAnm%2FRD7uOp1OqJoJ8S9GNhXf6rbUFnhyR6KQN8at1vWHeD9VQsg5MVGWkBWhz5PK51OVqG6rutF23O8wzzvSS98rhYEi5tGqel%2BpmQeJU9TSOEfzif4v3nYZ5wqo2aX8mE6%2BUO8XJDkTyxeQJjruuOJVv6LVOyhRYLUI%2BmyBpXxfu1xVSW2odeajDetLfRBjqkAaoQeFbcxf7%2FOHYn3JNU90y91E%2FTFJ1AWMW4Q7wIQ4TMSa3iMiyRaDm%2BP9p0bg0uKFMty4uAx7L1HxycjkvXklNi2%2Bgd4dAl73dJ0vKr9FOBheWeEMY3bjSUqdV0e2DRFwv42mt1AG1MksU10iFMdy9wqYNYjpGnf1tG60P8c15pqcjYeUNP878VUBfBdrpGoiolY%2BnoMUdkATJ3vz2xyAAxtIYU&X-Amz-Signature=7ffb7e5f6f98d6446e0300375ce44eceeaaf44f7f2cfcb40f14e95290632fece&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject",
+          "expiry_time": "2026-06-14T00:12:39.175Z"
         }
       },
       "parent": {
@@ -1860,185 +1513,11 @@
       "url": "https://app.notion.com/p/Almuerzo-de-Postgrado-37e9138861798035bd53ef5a1edc545c",
       "public_url": null,
       "archived": false
-    },
-    {
-      "object": "page",
-      "id": "37e91388-6179-80b0-99c6-f4069164f92e",
-      "created_time": "2026-06-13T18:56:00.000Z",
-      "last_edited_time": "2026-06-13T20:25:00.000Z",
-      "created_by": {
-        "object": "user",
-        "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
-      },
-      "last_edited_by": {
-        "object": "user",
-        "id": "1a0d872b-594c-8125-bf9c-000226c544bf"
-      },
-      "cover": {
-        "type": "external",
-        "external": {
-          "url": "https://images.mubicdn.net/images/film/3734/cache-10349-1745489585/image-w1280.jpg"
-        }
-      },
-      "icon": {
-        "type": "emoji",
-        "emoji": "🌈"
-      },
-      "parent": {
-        "type": "database_id",
-        "database_id": "2a191388-6179-807e-a714-c65882430bb7"
-      },
-      "in_trash": false,
-      "is_archived": false,
-      "is_locked": false,
-      "properties": {
-        "Comentario": {
-          "id": "%40oht",
-          "type": "rich_text",
-          "rich_text": []
-        },
-        "Tipo": {
-          "id": "CqKE",
-          "type": "select",
-          "select": {
-            "id": "2f80a89c-fd4a-4e2d-8956-30e5ae5e17f3",
-            "name": "Evento",
-            "color": "red"
-          }
-        },
-        "Etiquetas": {
-          "id": "G~BZ",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "1cdcc68f-b112-4f84-91bc-c164e9eceee6",
-              "name": "Pride Month",
-              "color": "orange"
-            }
-          ]
-        },
-        "Organiza": {
-          "id": "L%3FvU",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "9cba865c-db56-4a12-bb08-1039b57090de",
-              "name": "CAi",
-              "color": "yellow"
-            }
-          ]
-        },
-        "End Date Calendar": {
-          "id": "Ortv",
-          "type": "formula",
-          "formula": {
-            "type": "date",
-            "date": {
-              "start": "2026-06-15",
-              "end": null,
-              "time_zone": null
-            }
-          }
-        },
-        "Color Calendar": {
-          "id": "PjN%5E",
-          "type": "formula",
-          "formula": {
-            "type": "number",
-            "number": 3
-          }
-        },
-        "Inscripciones": {
-          "id": "RnWW",
-          "type": "url",
-          "url": null
-        },
-        "AllDay Calendar": {
-          "id": "Zyi~",
-          "type": "formula",
-          "formula": {
-            "type": "string",
-            "string": "yes"
-          }
-        },
-        "Público Objetivo": {
-          "id": "%5CoJN",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "a8522e75-f267-484a-86ff-565ae1759067",
-              "name": "Disidencias",
-              "color": "purple"
-            }
-          ]
-        },
-        "Público": {
-          "id": "_XKn",
-          "type": "checkbox",
-          "checkbox": false
-        },
-        "Fecha": {
-          "id": "aNoC",
-          "type": "date",
-          "date": {
-            "start": "2026-06-15",
-            "end": null,
-            "time_zone": null
-          }
-        },
-        "Áreas": {
-          "id": "i%3AXf",
-          "type": "multi_select",
-          "multi_select": [
-            {
-              "id": "820397f1-e14a-40a3-91c1-88b15d06ea5c",
-              "name": "Disidencias",
-              "color": "brown"
-            }
-          ]
-        },
-        "Lugar": {
-          "id": "vaIL",
-          "type": "rich_text",
-          "rich_text": []
-        },
-        "Info": {
-          "id": "wduh",
-          "type": "url",
-          "url": null
-        },
-        "Nombre": {
-          "id": "title",
-          "type": "title",
-          "title": [
-            {
-              "type": "text",
-              "text": {
-                "content": "Tarde de Cine Disidente",
-                "link": null
-              },
-              "annotations": {
-                "bold": false,
-                "italic": false,
-                "strikethrough": false,
-                "underline": false,
-                "code": false,
-                "color": "default"
-              },
-              "plain_text": "Tarde de Cine Disidente",
-              "href": null
-            }
-          ]
-        }
-      },
-      "url": "https://app.notion.com/p/Tarde-de-Cine-Disidente-37e91388617980b099c6f4069164f92e",
-      "public_url": null,
-      "archived": false
     }
   ],
   "next_cursor": null,
   "has_more": false,
   "type": "page_or_database",
   "page_or_database": {},
-  "request_id": "c961c4e3-bb58-4d58-94ed-22ab544b8f11"
+  "request_id": "8d0bdd56-bdee-4564-be4c-bcb76b328f45"
 }

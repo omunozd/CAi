@@ -1,14 +1,13 @@
 from flask import Flask, make_response, send_file
 from ics import Calendar, Event
-from threading import Thread, Timer
 import requests
 import os
 from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 from mimetypes import guess_type
-fromisoformat = datetime.fromisoformat
-def now_time(): return datetime.now(timezone.utc)
-from wsgiref.simple_server import make_server
+def now_time():
+    """Devuelve la fecha y hora UTC actual para archivos generados y eventos de respaldo."""
+    return datetime.now(timezone.utc)
 import traceback
 
 from mysite.TVs.QFMC import spotify
@@ -16,7 +15,7 @@ from mysite.notion_creds import HEADERS_TRINIP, DATABASES_IDS
 from mysite.utils import printt
 
 def get_content_type(file_path: str) -> str:
-    """Determina el Content-Type basado en la extensión del archivo"""
+    """Devuelve el Content-Type HTTP de un archivo segun su extension."""
     
     mime_type, _ = guess_type(file_path)
     if mime_type:
@@ -43,28 +42,72 @@ def get_content_type(file_path: str) -> str:
     }
     return content_types.get(ext, 'application/octet-stream')
 
-# Go to https://omunozd.pythonanywhere.com/calendar/
-
-
-TURNOS = Calendar()
-
-FOLDER = ''
+CALENDAR_FOLDER = os.path.join("mysite", "calendars")
 SANTIAGO_TZ = ZoneInfo("America/Santiago")
 
 app = Flask(__name__)
 
 
+def calendar_file_path(filename: str) -> str:
+    """Devuelve la ruta absoluta de un archivo ICS dentro de la carpeta de calendarios."""
+    os.makedirs(CALENDAR_FOLDER, exist_ok=True)
+    return os.path.abspath(os.path.join(CALENDAR_FOLDER, filename))
+
+
+def calendar_folder_files() -> list[str]:
+    """Lista los archivos disponibles en la carpeta de calendarios."""
+    os.makedirs(CALENDAR_FOLDER, exist_ok=True)
+    return os.listdir(CALENDAR_FOLDER)
+
+
 def qfmc_event_week_filter(today=None) -> str:
+    """Devuelve el filtro semanal de Notion para QFMC; en fines de semana usa la proxima semana."""
     if today is None:
         today = datetime.now(SANTIAGO_TZ).date()
 
     return "next_week" if today.weekday() >= 5 else "this_week"
 
 
-def get_notion_data(payload: dict = {}, filename: str = "calendar.ics"):
+def get_notion_icon_text(notion_icon: dict | None) -> str:
+    """Devuelve el emoji de un icono de Notion, o texto vacio si el icono es archivo o link."""
+    if not notion_icon or notion_icon.get("type") != "emoji":
+        return ""
+
+    return f"{notion_icon.get('emoji', '')} "
+
+
+def calendar_start_of_year_filter(today=None) -> dict:
+    """Devuelve el filtro de Notion para incluir eventos desde el inicio del año actual."""
+    if today is None:
+        today = datetime.now(SANTIAGO_TZ).date()
+
+    return {
+        "property": "Fecha",
+        "date": {
+            "on_or_after": f"{today.year}-01-01"
+        }
+    }
+
+
+def with_calendar_base_filter(payload: dict | None = None) -> dict:
+    """Combina un payload de Notion con el filtro base del calendario anual."""
+    payload = dict(payload or {})
+    base_filter = calendar_start_of_year_filter()
+    existing_filter = payload.get("filter")
+
+    payload["filter"] = {
+        "and": [base_filter, existing_filter] if existing_filter else [base_filter]
+    }
+
+    return payload
+
+
+def get_notion_data(payload: dict | None = None, filename: str = "calendar.ics"):
+    """Obtiene actividades desde Notion y escribe un calendario publico de Ingenieria en formato ICS."""
     url = f"https://api.notion.com/v1/databases/{DATABASES_IDS['actividades_ing']}/query"
     data = []
     run = True
+    payload = with_calendar_base_filter(payload)
     payload["page_size"] = 100
 
     while run:
@@ -97,7 +140,7 @@ def get_notion_data(payload: dict = {}, filename: str = "calendar.ics"):
                 if not n["properties"]["Fecha"]["date"]["end"]:
                     event.duration = {"hours": 1, "minutes": 10}
 
-            icon = n["icon"][n["icon"]["type"]] + " " if n["icon"] else ""
+            icon = get_notion_icon_text(n.get("icon"))
 
             name = n["properties"]["Nombre"]["title"][0]["text"]["content"] if n["properties"]["Nombre"] and len(
                 n["properties"]["Nombre"]["title"]) > 0 else ""
@@ -141,14 +184,12 @@ def get_notion_data(payload: dict = {}, filename: str = "calendar.ics"):
         f"BEGIN:VCALENDAR\nX-WR-CALNAME:{cal_name}\nX-WR-TIMEZONE:America/Santiago"
     )
 
-    with open(f"mysite/{filename}", "w", encoding="utf-8") as f:
-        f.write(ics_ser.replace("\r\n", "\n"))
-
-    with open(filename, "w", encoding="utf-8") as f:
+    with open(calendar_file_path(filename), "w", encoding="utf-8") as f:
         f.write(ics_ser.replace("\r\n", "\n"))
 
 
 def calendar_error(error):
+    """Construye un calendario ICS breve con un evento que describe un error de actualizacion."""
     cal = Calendar()
 
     event = Event(
@@ -164,35 +205,36 @@ def calendar_error(error):
 
 
 def save_file(cal, name):
-    with open(f"mysite/{name}.ics", "w", encoding="utf-8") as f:
-        f.write(cal.serialize().replace("\r\n", "\n"))
-
-    with open(f"{name}.ics", "w", encoding="utf-8") as f:
+    """Serializa un calendario ICS en la misma ruta que usa el servidor local de tests.py."""
+    with open(calendar_file_path(f"{name}.ics"), "w", encoding="utf-8") as f:
         f.write(cal.serialize().replace("\r\n", "\n"))
 
 
 @app.route('/')
 def hello_world():
+    """Sirve una pagina minima que dirige a visitantes al Instagram del CAi."""
     return 'Si buscas más información, visita nuestro <a href="instagram.com/caipuc">instagram</a>'
 
 
 @app.route("/calendar/ing", methods=['GET'])
 def return_calendar():
+    """Actualiza y devuelve el calendario completo de actividades publicas de Ingenieria como ICS."""
 
     get_notion_data()
 
     try:
-        file_path = os.path.join(FOLDER, "calendar.ics")
+        file_path = calendar_file_path("calendar.ics")
         if os.path.isfile(file_path):
             return send_file(file_path, as_attachment=True)
         else:
-            return make_response(f"File calendar.ics not found. With {file_path} {os.listdir('./mysite')}", 404)
+            return make_response(f"File calendar.ics not found. With {file_path} {calendar_folder_files()}", 404)
     except Exception as e:
         return make_response(f"Error: {str(e)}", 500)
 
 
 @app.route("/calendar/ing/<string:filtros_str>", methods=['GET'])
 def return_calendar_filtrado(filtros_str: str):
+    """Devuelve un calendario ICS filtrado por codigos URL de areas, publicos u organizadores."""
 
     ID_AREAS = {
         "INN": "Innovación",
@@ -301,19 +343,36 @@ def return_calendar_filtrado(filtros_str: str):
     get_notion_data(payload={"filter": {"or": filtros}}, filename=filename)
 
     try:
-        file_path = os.path.join(FOLDER, filename)
+        file_path = calendar_file_path(filename)
         if os.path.isfile(file_path):
             return send_file(file_path, as_attachment=True)
         else:
-            return make_response(f"File {filename} not found. With {file_path} {os.listdir('./mysite')}", 404)
+            return make_response(f"File {filename} not found. With {file_path} {calendar_folder_files()}", 404)
     except Exception as e:
         return make_response(f"Error: {str(e)}", 500)
 
+@app.route("/TV/assets/<path:filepath>", methods=['GET'])
+def TV_assets(filepath: str):
+    """Sirve assets del frontend QFMC, como fuentes locales, desde una ruta URL estable."""
+    # Assets compartidos por el display QFMC, usando rutas absolutas estables desde CSS.
+    abs_file_path = os.path.abspath(os.path.join("mysite", "TVs", "QFMC", "web", "frontend", "assets", filepath))
+    abs_assets_path = os.path.abspath(os.path.join("mysite", "TVs", "QFMC", "web", "frontend", "assets"))
+
+    if not abs_file_path.startswith(abs_assets_path):
+        return make_response("Acceso denegado", 403)
+
+    if not os.path.isfile(abs_file_path):
+        return make_response(f"Asset no encontrado: {filepath}", 404)
+
+    try:
+        return send_file(abs_file_path, mimetype=get_content_type(abs_file_path))
+    except Exception as e:
+        return make_response(f"Error sirviendo asset: {str(e)}", 500)
+
+
 @app.route("/TV/<path:filepath>", methods=['GET'])
 def TVs(filepath: str):
-    """
-    Sirve archivos desde TVs/ y maneja el caso especial de QFMC_hor.html
-    """
+    """Sirve archivos de displays TV y actualiza datos de QFMC antes de devolver su frontend."""
     # Actualizar desde Notion si se pregunta por QFMC
     if filepath in ["QFMC_hor.html","QFMC"]:
         try:
@@ -328,6 +387,12 @@ def TVs(filepath: str):
                             "property": "Fecha",
                             "date": {
                                 week_filter: {}
+                            }
+                        },
+                        {
+                            "property": "P\u00fablico",
+                            "checkbox": {
+                                "equals": True
                             }
                         }
                     ]
@@ -401,6 +466,7 @@ def TVs(filepath: str):
     except Exception as e:
         return make_response(f"Error sirviendo archivo: {str(e)}", 500)  
 
+
 spotify.guardar_codigo_spotify(
         "https://open.spotify.com/intl-es/track/4Qs3OEgzBPGPmRR5QJ0UIs", # Mi Equilibrio Espiritual
         tipo_archivo=".svg",
@@ -413,24 +479,3 @@ spotify.guardar_codigo_spotify(
             "spotify_codes"
         )
     )
-
-if __name__ == '__main__':
-    HOST = 'localhost'
-    PORT = 4160
-
-    class ServerThread(Thread):
-        def __init__(self):
-            super().__init__(name="Local Server Thread")
-
-        def run(self):
-            with make_server(HOST, PORT, app) as httpd:
-                try:
-                    print(f'Iniciando servidor: http://{HOST}:{PORT}')
-                    print('''Utiliza 'Ctrl + C' o 'Cmd + C' para apagar el servidor''')
-                    httpd.serve_forever()
-                except KeyboardInterrupt:
-                    print('\nApagando servidor')
-                    httpd.shutdown()
-
-    localserver_t = ServerThread()
-    localserver_t.start()

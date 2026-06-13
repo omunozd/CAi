@@ -4,6 +4,8 @@
 const TIEMPO_IMAGEN = 10000; //ms
 const MAX_LEN_BEFORE_SHRINK = 26; //chars
 const DATA_FILEPATH = "QFMC/web/backend/data/QFMC_data.json";
+const DEFAULT_EVENT_DURATION_MINUTES = 70;
+const EVENT_TIME_ZONE = 'America/Santiago';
 
 // Función para obtener el día de la semana en español
 function getDiaSemana(fecha) {
@@ -19,11 +21,11 @@ function normalizeEvent(n) {
     const startRaw = n.properties?.Fecha?.date?.start || '';
     const endRaw = n.properties?.Fecha?.date?.end || '';
     function parseDate(raw) {
-        if (!raw) return { fecha: '', hora: '' };
-        if (!raw.includes('T')) return { fecha: raw, hora: '' };
+        if (!raw) return { raw: '', fecha: '', hora: '' };
+        if (!raw.includes('T')) return { raw, fecha: raw, hora: '' };
         const [fecha, tiempo] = raw.split('T');
         const hora = tiempo.substring(0, 5); // HH:MM
-        return { fecha, hora };
+        return { raw, fecha, hora };
     }
 
     return {
@@ -33,6 +35,7 @@ function normalizeEvent(n) {
             nombre: n.properties?.Tipo?.select?.name || '',
             color: n.properties?.Tipo?.select?.color || ''
         },
+        publico: n.properties?.["P\u00fablico"]?.checkbox === true,
         lugar: n.properties?.Lugar?.rich_text?.[0]?.text?.content || '',
         etiquetas: (n.properties?.Etiquetas?.multi_select || []).map(t => ({ nombre: t.name, color: t.color })),
         comentario: n.properties?.Comentario?.rich_text?.[0]?.text?.content || '',
@@ -44,6 +47,71 @@ function normalizeEvent(n) {
             todo_el_dia: !startRaw.includes('T')
         }
     };
+}
+
+function getZonedDateTime(fecha, hora = '00:00:00', timeZone = EVENT_TIME_ZONE) {
+    if (!fecha) return null;
+    const [year, month, day] = fecha.split('-').map(Number);
+    const [hour, minute, second] = hora.split(':').map(Number);
+    const utcGuess = new Date(Date.UTC(year, month - 1, day, hour, minute, second || 0));
+    const parts = new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hourCycle: 'h23'
+    }).formatToParts(utcGuess).reduce((acc, part) => {
+        acc[part.type] = part.value;
+        return acc;
+    }, {});
+    const zonedAsUtc = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute, parts.second);
+    const offset = zonedAsUtc - utcGuess.getTime();
+    return new Date(utcGuess.getTime() - offset);
+}
+
+function parseLocalDate(fecha, endOfDay = false) {
+    const date = getZonedDateTime(fecha, endOfDay ? '23:59:59' : '00:00:00');
+    if (date && endOfDay) date.setMilliseconds(999);
+    return date;
+}
+
+function hasExplicitTimeZone(raw) {
+    return /([zZ]|[+-]\d{2}:?\d{2})$/.test(raw);
+}
+
+function parseTimedDate(datePart) {
+    if (!datePart.raw?.includes('T')) return null;
+    if (hasExplicitTimeZone(datePart.raw)) return new Date(datePart.raw);
+    const [fecha, tiempo] = datePart.raw.split('T');
+    return getZonedDateTime(fecha, tiempo.substring(0, 8));
+}
+
+function getEventStartDate(evento) {
+    const inicio = evento.fecha.inicio;
+    if (!inicio.fecha) return null;
+    return inicio.raw?.includes('T') ? parseTimedDate(inicio) : parseLocalDate(inicio.fecha);
+}
+
+function getEventEndDate(evento) {
+    const inicio = evento.fecha.inicio;
+    const fin = evento.fecha.fin;
+
+    if (!inicio.fecha) return null;
+
+    if (fin.raw?.includes('T')) {
+        return parseTimedDate(fin);
+    }
+
+    if (inicio.raw?.includes('T')) {
+        const start = getEventStartDate(evento);
+        if (!start) return null;
+        return new Date(start.getTime() + DEFAULT_EVENT_DURATION_MINUTES * 60 * 1000);
+    }
+
+    return parseLocalDate(fin.fecha || inicio.fecha, true);
 }
 
 function setupEditableElements() {
@@ -116,23 +184,21 @@ async function loadAndPopulate() {
         return; 
     }
 
-    // Normalizar eventos y filtrar por fecha futura
+    // Normalizar eventos y filtrar los que ya terminaron
     let eventos = results.map(normalizeEvent);
-    
+
     const ahora = new Date();
-    ahora.setHours(0, 0, 0, 0); // Comparar por día completo
-    
-    // Filtrar solo eventos que son después de hoy
+
+    // Mantener eventos hasta que terminen, incluyendo eventos del mismo dia.
     eventos = eventos.filter(evento => {
-        if (!evento.fecha.inicio.fecha) return false;
-        const fechaEvento = new Date(evento.fecha.inicio.fecha);
-        return fechaEvento >= ahora;
+        const finEvento = getEventEndDate(evento);
+        return evento.publico && finEvento && finEvento >= ahora;
     });
-    
-    // Ordenar eventos por fecha (más próximos primero)
+
+    // Ordenar eventos por fecha (mas proximos primero)
     eventos.sort((a, b) => {
-        const fechaA = new Date(a.fecha.inicio.fecha);
-        const fechaB = new Date(b.fecha.inicio.fecha);
+        const fechaA = getEventStartDate(a);
+        const fechaB = getEventStartDate(b);
         return fechaA - fechaB;
     });
     

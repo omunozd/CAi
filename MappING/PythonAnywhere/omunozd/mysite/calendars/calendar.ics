@@ -1,0 +1,106 @@
+BEGIN:VCALENDAR
+X-WR-CALNAME:Actividades en Ingeniería UC | CAi💛
+X-WR-TIMEZONE:America/Santiago
+VERSION:2.0
+PRODID:ics.py - http://git.io/lLljaA
+BEGIN:VEVENT
+CATEGORIES:Ingeniería UC
+CLASS:Conversatorio
+DESCRIPTION:Entrega de detalles y respuesta a preguntas. Pizza para los inscritos! 🍕 \nInscripciones: https://forms.cloud.microsoft/r/auM9c38dmp\nMás información: https://www.instagram.com/p/DZYZDgGG8I2\nOrganizan: CAi\, FIUC\nPúblico objetivo: General\nÁreas de Interés: Ingeniería UC
+DURATION:PT1H10M
+LOCATION:Sala por confirmar
+DTSTART:20260615T173000Z
+SUMMARY:Conversatorio HUB CAi FIUC
+UID:0089647c-a931-4fdf-91a5-c04900bea738@0089.org
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260604
+CATEGORIES:Vida Universitaria
+CLASS:Intervención
+DESCRIPTION:Organizan: CAi\nPúblico objetivo: \nÁreas de Interés: Vida Universitaria
+LOCATION:Patio de Ingeniería
+SUMMARY:Actividad CAi
+UID:9209eca8-e01b-42ae-8e78-6dcd4fac484d@9209.org
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Comunidad
+CLASS:Intervención
+DESCRIPTION:Más información: https://www.instagram.com/p/DZacrs5FsRE\nOrganizan: CAi\nPúblico objetivo: G26\nÁreas de Interés: Comunidad
+DTEND:20260615T185000Z
+LOCATION:Cueva CAi
+DTSTART:20260615T173000Z
+SUMMARY:⌛ Cápsulas Temporales G26
+UID:95ccd258-ad9d-4dd7-bc5f-4d92ec785ecc@95cc.org
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Ingeniería UC
+CLASS:Encuentro
+DESCRIPTION:Conversación junto al profesor Juan Carlos Tiznado para conversar\, preguntar y orientarte sobre tu carrera y proyecciones profesionales\nInscripciones: https://forms.office.com/r/gt7Rxw8kJs\nMás información: https://www.instagram.com/p/DZYKDXFkZBM/\nOrganizan: DIEG\nPúblico objetivo: G25\nÁreas de Interés: Ingeniería UC
+DTEND:20260616T184000Z
+DTSTART:20260616T173000Z
+SUMMARY:🪨 Almorzando en el DIEG
+UID:4c64cd95-ae81-42b9-a5c7-32b83d6e5428@4c64.org
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260615
+CATEGORIES:Vida Universitaria
+CLASS:Inicio plazo
+DESCRIPTION:Organizan: CAi\nPúblico objetivo: General\nÁreas de Interés: Vida Universitaria
+SUMMARY:📷 EnfoCAi
+UID:8384dc11-5671-4013-a301-11a9ab096999@8384.org
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Vida Universitaria
+CLASS:Encuentro
+DESCRIPTION:Organizan: CAi\nPúblico objetivo: \nÁreas de Interés: Vida Universitaria
+DURATION:PT1H10M
+LOCATION:Patio de Ingeniería
+DTSTART:20260606T173000Z
+SUMMARY:Cumpleaños Sof
+UID:a13f5849-9f7b-47a2-8723-7c74f049848e@a13f.org
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260128
+CATEGORIES:Vida Universitaria,Salud y Bienestar
+CLASS:Encuentro
+DESCRIPTION:Organizan: CAi\nPúblico objetivo: Major Eléctrica\, NACE\, Talento e Inclusión\nÁreas de Interés: Vida Universitaria\, Salud y Bienestar
+LOCATION:Patio de Ingeniería
+SUMMARY:Actividad CAi
+UID:cd479165-2913-416c-b13f-a41372d4eddc@cd47.org
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260616
+CATEGORIES:LICC
+CLASS:Charla
+DESCRIPTION:Organizan: CA\nPúblico objetivo: LICC\nÁreas de Interés: LICC
+SUMMARY:💻 Charla Postgrado LICC
+UID:b6f32533-9942-4bc3-9762-73bd074d29e7@b6f3.org
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260617
+CATEGORIES:Comunidad
+CLASS:Evento
+DESCRIPTION:Organizan: CAi\nPúblico objetivo: General\nÁreas de Interés: Comunidad
+SUMMARY:🎲 Tarde de Juegos
+UID:9f226f62-c9d6-4215-a2b2-0943214d9927@9f22.org
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20260619
+DTEND;VALUE=DATE:20260622
+CATEGORIES:Sustentabilidad
+CLASS:Voluntariado
+DESCRIPTION:Únete a reforestar\, desmalezar y embellecer el cerro\, entre otros.\nInscripciones: https://tr.ee/qiaTaWeRRg\nMás información: https://www.instagram.com/p/DZD5ATCkYhc\nOrganizan: CAi\, FEUC\, CAAIF\nPúblico objetivo: General\nÁreas de Interés: Sustentabilidad
+LOCATION:Cerro La Ballena
+SUMMARY:🌲 Operaciones Ballena Verde
+UID:7abace50-5fab-431d-9673-f6929b346980@7aba.org
+END:VEVENT
+BEGIN:VEVENT
+CATEGORIES:Investigación y Postgrado
+CLASS:Encuentro
+DESCRIPTION:Organizan: CAP\nPúblico objetivo: Postgrado\nÁreas de Interés: Investigación y Postgrado
+DURATION:PT1H10M
+DTSTART:20260615T173000Z
+SUMMARY:🍽️ Almuerzo de Postgrado
+UID:3ef67cc6-6be6-4d9d-914d-a36a377a40cc@3ef6.org
+END:VEVENT
+END:VCALENDAR
