@@ -1,2 +1,3 @@
 calendar-api/
 app_rir.py
+__pycache__/

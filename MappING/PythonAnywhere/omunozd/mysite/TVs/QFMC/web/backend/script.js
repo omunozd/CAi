@@ -36,7 +36,8 @@ function normalizeEvent(n) {
         lugar: n.properties?.Lugar?.rich_text?.[0]?.text?.content || '',
         etiquetas: (n.properties?.Etiquetas?.multi_select || []).map(t => ({ nombre: t.name, color: t.color })),
         comentario: n.properties?.Comentario?.rich_text?.[0]?.text?.content || '',
-        imagen: n.cover?.external?.url || '',
+        imagen: n.cover?.external?.url || n.cover?.file?.url || '',
+        imagenTipo: n.cover?.type || '',
         fecha: {
             inicio: parseDate(startRaw),
             fin: parseDate(endRaw),
@@ -141,6 +142,7 @@ async function loadAndPopulate() {
     const elemTitulo = document.getElementById('event-title');
     const elemHora = document.getElementById('event-time');
     const elemLugar = document.getElementById('event-location');
+    const elemLugarChip = document.getElementById('event-location-chip');
     const elemComentario = document.getElementById('event-description');
     const elemEtiquetas = document.getElementById('event-tags');
     const elemImagen = document.getElementById('event-image');
@@ -149,7 +151,7 @@ async function loadAndPopulate() {
     async function mostrarEvento(evento) {
         // Primero cargar la imagen si existe
         if (elemImagen && evento.imagen) {
-            const urlLimpia = evento.imagen.split('?')[0];
+            const urlLimpia = evento.imagenTipo === 'file' ? evento.imagen : evento.imagen.split('?')[0];
             await new Promise((resolve) => {
                 const img = new Image();
                 img.onload = resolve;
@@ -159,7 +161,7 @@ async function loadAndPopulate() {
             elemImagen.src = urlLimpia;
             elemImagen.hidden = false;
         } else if (elemImagen) {
-            elemImagen.src = "../frontend/sources/carton.jpg"
+            elemImagen.src = "../TV/QFMC/web/frontend/sources/carton.jpg"
             elemImagen.hidden = true;
         }
 
@@ -175,7 +177,12 @@ async function loadAndPopulate() {
         }
 
         // Lugar
-        if (elemLugar) elemLugar.textContent = evento.lugar || 'Sin ubicación';
+        const lugar = (evento.lugar || '').trim();
+        if (elemLugar) elemLugar.textContent = lugar;
+        if (elemLugarChip) {
+            elemLugarChip.hidden = !lugar;
+            elemLugarChip.style.display = lugar ? 'inline-flex' : 'none';
+        }
 
         // Comentario
         if (elemComentario) {

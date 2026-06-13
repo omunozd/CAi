@@ -3,8 +3,8 @@ from ics import Calendar, Event
 from threading import Thread, Timer
 import requests
 import os
-import datetime
-from datetime import datetime, datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 from mimetypes import guess_type
 fromisoformat = datetime.fromisoformat
 def now_time(): return datetime.now(timezone.utc)
@@ -36,6 +36,10 @@ def get_content_type(file_path: str) -> str:
         '.gif': 'image/gif',
         '.ico': 'image/x-icon',
         '.pdf': 'application/pdf',
+        '.ttf': 'font/ttf',
+        '.otf': 'font/otf',
+        '.woff': 'font/woff',
+        '.woff2': 'font/woff2',
     }
     return content_types.get(ext, 'application/octet-stream')
 
@@ -44,10 +48,17 @@ def get_content_type(file_path: str) -> str:
 
 TURNOS = Calendar()
 
-
 FOLDER = ''
+SANTIAGO_TZ = ZoneInfo("America/Santiago")
 
 app = Flask(__name__)
+
+
+def qfmc_event_week_filter(today=None) -> str:
+    if today is None:
+        today = datetime.now(SANTIAGO_TZ).date()
+
+    return "next_week" if today.weekday() >= 5 else "this_week"
 
 
 def get_notion_data(payload: dict = {}, filename: str = "calendar.ics"):
@@ -306,7 +317,9 @@ def TVs(filepath: str):
     # Actualizar desde Notion si se pregunta por QFMC
     if filepath in ["QFMC_hor.html","QFMC"]:
         try:
-            # Body para llamar a API de Notion - eventos de esta semana
+            week_filter = qfmc_event_week_filter()
+
+            # Body para llamar a API de Notion - eventos de esta semana o la próxima si es fin de semana
             payload = {
                 "page_size": 100,
                 "filter": {
@@ -314,7 +327,7 @@ def TVs(filepath: str):
                         {
                             "property": "Fecha",
                             "date": {
-                                "this_week": {}
+                                week_filter: {}
                             }
                         }
                     ]
